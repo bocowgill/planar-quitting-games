@@ -53,7 +53,7 @@ private theorem support_sum (g : Game I) {σ : Profile I} {t : ℕ} (i : I)
     rw [Finset.mem_powerset] at hA
     simp [unsupported_prob hA hσ]
 
-private theorem profile_row (g : Game I) (p : Calendar I) (i : I) (q : ℕ → ℝ) (t : ℕ) :
+theorem profile_row (g : Game I) (p : Calendar I) (i : I) (q : ℕ → ℝ) (t : ℕ) :
     let σ := p.profile.revise i q
     coalitionProb σ t ∅ = remaining p i q t ∧
     (∑ A : Finset I, if A = ∅ then 0 else coalitionProb σ t A * g.prize A i) =

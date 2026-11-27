@@ -1,6 +1,6 @@
 {
   "challenge_module": "Challenge",
   "solution_module": "Solution",
-  "theorem_names": ["PlanarQuitting.periodic_calendar_uniform_payoff"],
+  "theorem_names": ["PlanarQuitting.planar_uniform_payoff"],
   "permitted_axioms": ["propext", "Classical.choice", "Quot.sound"]
 }

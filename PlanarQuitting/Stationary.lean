@@ -56,7 +56,7 @@ private theorem stationary_product (x : I → ℝ) (i : I) (q : ℕ → ℝ) (t 
   intro j hj
   simp [Profile.stationary, (Finset.mem_erase.mp hj).1]
 
-private theorem stationarity_row (g : Game I) (x : I → ℝ) (i : I) (q : ℕ → ℝ) (t : ℕ) :
+theorem stationarity_row (g : Game I) (x : I → ℝ) (i : I) (q : ℕ → ℝ) (t : ℕ) :
     let σ := (Profile.stationary x).revise i q
     (∑ A : Finset I, if A = ∅ then 0 else coalitionProb σ t A * g.prize A i) =
       (1-q t) * stationaryCash g x i + q t * stationaryQuit g x i := by

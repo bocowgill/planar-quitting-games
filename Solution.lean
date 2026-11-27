@@ -1,5 +1,5 @@
 module
 
-public import PlanarQuitting.Independent
+public import PlanarQuitting.Existence
 
-#print axioms PlanarQuitting.periodic_calendar_uniform_payoff
+#print axioms PlanarQuitting.planar_uniform_payoff

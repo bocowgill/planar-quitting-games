@@ -1,12 +1,12 @@
 # Review draft. Add the maintainer's selected SPDX licence before public release.
 version: "v0.4"
 project:
-  name: "Uniform payoff from a periodic quitting calendar"
+  name: "Uniform equilibrium in planar quitting games"
   description: >-
-    A periodic calendar with one prospective quitter at each live date and
-    individually rational continuation promises can be refined to give a uniform
-    Nash payoff. The proof checks the expected payoff and unilateral regret
-    bounds for the ordinary finite quitting game with independent randomization.
+    Every finite quitting game whose singleton prizes lie in an affine plane
+    has a uniform Nash equilibrium payoff under independent randomization.
+    One profile per tolerance works at every sufficiently large horizon
+    against arbitrary unilateral behavioral deviations.
   authors: ["Bo Cowgill"]
   responsible_maintainers: ["Bo Cowgill"]
   role: "substantive-development"
@@ -17,7 +17,7 @@ sources:
   - title: "Uniform equilibrium in planar quitting games"
     type: "original-proof"
     relationship: "other"
-    note: "Working paper forthcoming. This snapshot formalizes the periodic-calendar implication."
+    note: "Working paper forthcoming."
   - title: "Absorption paths and equilibria in quitting games"
     authors: ["Galit Ashkenazi-Golan", "Ilia Krasikov", "Catherine Rainer", "Eilon Solan"]
     id: "https://doi.org/10.1007/s10107-022-01807-6"
@@ -25,20 +25,23 @@ sources:
     relationship: "background"
 status:
   scope: >-
-    The comparator checks the periodic-calendar implication. Other Lean
-    results establish the feasible no-sink branch, stationary verification
-    under positive rival quitting probabilities, and the regular-core
-    stationary-comparisons-or-cycle alternative. The full affine-plane
-    existence statement remains a paper theorem.
+    The Comparator configuration selects the full affine-plane existence
+    theorem. The proof covers the regular-core stationary comparison or
+    directed cycle, all equilibrium implementations, and the perturbation
+    argument for degenerate configurations.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
+    - declaration: "PlanarQuitting.planar_uniform_payoff"
+      file: "PlanarQuitting/Existence.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
     - declaration: "PlanarQuitting.periodic_calendar_uniform_payoff"
       file: "PlanarQuitting/Independent.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: "comparator.json"
     - declaration: "PlanarQuitting.uniform_of_feasible_no_sink"
       file: "PlanarQuitting/CycleImplementation.lean"
       sorry_count: 0
@@ -64,8 +67,8 @@ automation:
 fidelity:
   divergences: >-
     Live histories are indexed by their length. At an absorbing state every
-    stage gives the fixed prize. The checked implication assumes a calendar
-    certificate.
+    stage gives the fixed prize. The affine-plane condition is specified by
+    an affine representation in two real coordinates.
 review:
   status: "agent-reviewed"
   notes: "The solution was checked in Lean 4.33.1."

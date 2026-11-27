@@ -21,18 +21,18 @@ Before absorption there is only one possible public history at each date, so a d
 
 ## Proof outline
 
-1. Compare the payoff of quitting immediately with the payoff of waiting. Brouwer degree can force a stationary exit by comparing the local behavior at unanimous continuation with the global behavior of the payoff comparisons.
+1. Compare the payoff of quitting immediately with the payoff of waiting. A signed count of the roots near unanimous continuation can force a stationary exit. When the comparison selects one quitter, a finite cutoff controls the incentive to wait indefinitely.
 2. In the directed-cycle case, use the polygon formed by the solo-payoff inequalities to schedule quitting attempts. At each date only one player may quit with positive probability. Subdividing those attempts makes simultaneous quits with a deviator rare and preserves the initial promised payoff.
 
 The proof handles degenerate planar configurations by perturbing the singleton rewards and bounding the effect on every finite-horizon payoff. [Proof notes](PROOF.md)
 
 ## Lean formalization
 
-- **Directed cycle.** A regular feasible face system with infeasible singleton sites and no sink gives a directed cycle. In the quitting game represented by those faces, with the stated payoff floors for players outside the face system, the cycle yields a uniform Nash payoff. [Geometry](PlanarQuitting/Geometry.lean) · [Uniform payoff from the cycle](PlanarQuitting/CycleImplementation.lean)
-- **Stationary exit.** When every player faces a positive rival quitting probability, the exact stationary payoff comparisons suffice for a uniform Nash payoff against arbitrary behavioral deviations. [Stationary profile](PlanarQuitting/Stationary.lean)
-- **Existence alternative.** For a regular nonempty core in which every singleton site is infeasible, Lean proves that the game has either a nonzero solution to the exact stationary payoff comparisons or a directed cycle. The proof computes the signed count at unanimous continuation and checks that any sole quitter in a stationary solution belongs to the core. [Checked alternative](PlanarQuitting/StationaryGuard.lean) · [Planar signed count](PlanarQuitting/PlanarComparison.lean)
+The complete planar theorem is checked as `PlanarQuitting.planar_uniform_payoff`. The definition of `HasUniformPayoff` quantifies over every later horizon and every unilateral behavioral deviation after choosing one profile and threshold. The same profile and threshold also work from every absorbing initial state, as checked by `PlanarQuitting.planar_uniform_payoff_all_states`. [Theorems](PlanarQuitting/Existence.lean) · [Game and payoff definitions](PlanarQuitting/Target.lean)
 
-The full affine-plane existence statement is recorded in Lean. The remaining work includes implementing the one-quitter and pure-wait cases and removing the regularity assumptions by perturbation. The Comparator configuration selects `PlanarQuitting.periodic_calendar_uniform_payoff`, the verified refinement from a periodic calendar to an independent-action uniform payoff. [Full target](PlanarQuitting/Target.lean) · [Calendar proof](PlanarQuitting/Independent.lean) · [Comparator configuration](comparator.json)
+- **Stationary comparison or directed cycle.** The signed count and the boundary walk give the existence alternative for the regular core. [Signed count](PlanarQuitting/PlanarComparison.lean) · [Stationary comparisons](PlanarQuitting/StationaryGuard.lean)
+- **Uniform payoff.** The equilibrium verification covers the directed quitting calendar, the stationary profile, the one-quitter cutoff, and permanent continuation. [Cycle](PlanarQuitting/CycleImplementation.lean) · [Stationary profile](PlanarQuitting/Stationary.lean) · [One quitter and permanent continuation](PlanarQuitting/SoloVerification.lean)
+- **Degenerate cases.** Approximation by regular planar games and uniform payoff bounds extend existence to every affine-plane representation. [Regular approximation](PlanarQuitting/RegularApproximation.lean) · [Payoff stability](PlanarQuitting/PayoffClosure.lean)
 
 ## Local verification
 
@@ -44,4 +44,4 @@ lake --wfail build PlanarQuitting Solution
 lake build Challenge
 ```
 
-The Challenge contains one deliberate `sorry` at the statement to compare. The checked results listed above use only `propext`, `Classical.choice`, and `Quot.sound`. [Formalization metadata](formalization.yaml)
+The Comparator configuration selects the full theorem. The Challenge contains one deliberate `sorry` at that statement. The solution uses only `propext`, `Classical.choice`, and `Quot.sound`. [Comparator configuration](comparator.json) · [Formalization metadata](formalization.yaml)

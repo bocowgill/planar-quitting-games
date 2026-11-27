@@ -1,4 +1,3 @@
-# Review draft. Add the maintainer's selected SPDX licence before public release.
 version: "v0.4"
 project:
   name: "Uniform equilibrium in planar quitting games"
@@ -8,6 +7,7 @@ project:
     One profile per tolerance works at every sufficiently large horizon
     against arbitrary unilateral behavioral deviations.
   authors: ["Bo Cowgill"]
+  license: "Apache-2.0"
   responsible_maintainers: ["Bo Cowgill"]
   role: "substantive-development"
 classification:

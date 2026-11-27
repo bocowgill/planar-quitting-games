@@ -2,7 +2,7 @@
 
 **A finite quitting game has a uniform Nash equilibrium payoff if its singleton quitting payoff vectors lie in an affine plane.** There can be any finite number of players. Payoffs when several players quit together, and payoffs while everyone continues, are unrestricted. This proves a special case of the multiplayer stochastic-game question. [Proof notes](PROOF.md) · [Formal Conjectures #7957](https://github.com/google-deepmind/formal-conjectures/issues/7957)
 
-**Private review draft. Working paper forthcoming.** OpenAI Codex helped with the Lean formalization.
+**Working paper forthcoming.** OpenAI Codex helped with the Lean formalization.
 
 ## The game and the result
 

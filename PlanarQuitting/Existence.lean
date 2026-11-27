@@ -15,6 +15,8 @@ unilateral behavioral deviations.
 
 namespace PlanarQuitting
 
+universe u
+
 open scoped BigOperators
 
 noncomputable section
@@ -66,7 +68,7 @@ theorem expectedAverage_relabel (g : Game I) (e : I ≃ J) (σ : Profile J) (i :
 /-- Every finite quitting game whose singleton absorbing payoff vectors
 lie in an affine plane has a uniform Nash equilibrium payoff. No restriction
 is imposed on its rewards from simultaneous quits or from live dates. -/
-theorem planar_uniform_payoff (I : Type*) [Fintype I] [DecidableEq I] :
+theorem planar_uniform_payoff (I : Type u) [Fintype I] [DecidableEq I] :
     PlanarExistence I := by
   intro g hplanar
   let e := Fintype.equivFin I

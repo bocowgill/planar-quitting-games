@@ -17,6 +17,8 @@ paid at that stage and every later stage.
 
 namespace PlanarQuitting
 
+universe u
+
 open scoped BigOperators
 
 noncomputable section
@@ -78,7 +80,7 @@ def PlanarExistence (I : Type*) [Fintype I] [DecidableEq I] : Prop :=
 
 set_option warn.sorry false in
 /-- Uniform Nash equilibrium payoff existence for all planar quitting games. -/
-theorem planar_uniform_payoff (I : Type*) [Fintype I] [DecidableEq I] :
+theorem planar_uniform_payoff (I : Type u) [Fintype I] [DecidableEq I] :
     PlanarExistence I := by
   sorry
 

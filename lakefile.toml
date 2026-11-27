@@ -1,0 +1,18 @@
+name = "planar_quitting_games"
+defaultTargets = ["Solution", "PlanarQuitting"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "0df444a360eaa60ab8c11dca51a86af692955474"
+
+[[lean_lib]]
+name = "PlanarQuitting"
+globs = ["PlanarQuitting.+"]
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"

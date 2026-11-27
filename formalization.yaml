@@ -1,0 +1,52 @@
+# Review draft. Add the maintainer's selected SPDX licence before public release.
+version: "v0.4"
+project:
+  name: "Uniform payoff from a periodic quitting calendar"
+  description: >-
+    A periodic calendar with one prospective quitter at each live date and
+    individually rational continuation promises can be refined to give a uniform
+    Nash payoff. The proof checks the expected payoff and unilateral regret
+    bounds for the ordinary finite quitting game with independent randomization.
+  authors: ["Bo Cowgill"]
+  responsible_maintainers: ["Bo Cowgill"]
+  role: "substantive-development"
+classification:
+  arxiv: ["math.OC"]
+  msc2020: ["91A15"]
+sources:
+  - title: "Uniform equilibrium in planar quitting games"
+    type: "original-proof"
+    relationship: "other"
+    note: "Working paper forthcoming. This snapshot formalizes the periodic-calendar implication."
+  - title: "Absorption paths and equilibria in quitting games"
+    authors: ["Galit Ashkenazi-Golan", "Ilia Krasikov", "Catherine Rainer", "Eilon Solan"]
+    id: "https://doi.org/10.1007/s10107-022-01807-6"
+    type: "paper"
+    relationship: "background"
+status:
+  scope: >-
+    The certificate-to-uniform-equilibrium implication. The affine-plane
+    existence theorem is a separate paper argument.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "PlanarQuitting.periodic_calendar_uniform_payoff"
+      file: "PlanarQuitting/Independent.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+automation:
+  methods:
+    - method: "agent"
+      models: ["GPT-6.2-Sol"]
+      framework: "OpenAI Codex"
+      tool_setup: "OpenAI Codex helped with the Lean formalization."
+fidelity:
+  divergences: >-
+    Live histories are indexed by their length. At an absorbing state every
+    stage gives the fixed prize. The checked implication assumes a calendar
+    certificate.
+review:
+  status: "agent-reviewed"
+  notes: "The solution was checked in Lean 4.33.1."

@@ -70,5 +70,5 @@ fidelity:
     stage gives the fixed prize. The affine-plane condition is specified by
     an affine representation in two real coordinates.
 review:
-  status: "agent-reviewed"
-  notes: "The solution was checked in Lean 4.35.0."
+  status: "unchecked"
+  notes: "The solution was checked in Lean 4.35.0 and passed Palomar's mechanical verification before this metadata revision."

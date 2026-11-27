@@ -27,9 +27,9 @@ status:
   scope: >-
     The comparator checks the periodic-calendar implication. Other Lean
     results establish the feasible no-sink branch, stationary verification
-    under positive rival quitting probabilities, planar complementarity
-    support, and a signed-count transfer. The full affine-plane existence
-    statement remains a paper theorem.
+    under positive rival quitting probabilities, and the regular-core
+    stationary-comparisons-or-cycle alternative. The full affine-plane
+    existence statement remains a paper theorem.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -49,6 +49,10 @@ status:
       axioms: ["propext", "Classical.choice", "Quot.sound"]
     - declaration: "PlanarQuitting.signed_count_transfer"
       file: "PlanarQuitting/IndexTransfer.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+    - declaration: "PlanarQuitting.stationary_comparisons_or_cycle"
+      file: "PlanarQuitting/StationaryGuard.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
 automation:

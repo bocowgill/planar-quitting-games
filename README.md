@@ -28,9 +28,11 @@ The proof handles degenerate planar configurations by perturbing the singleton r
 
 ## Lean formalization
 
-The checked theorem is `PlanarQuitting.periodic_calendar_uniform_payoff`. It starts from a periodic calendar with individually rational continuation promises and a positive rival quitting opportunity for every player. It proves that the calendar can be refined to support its initial promise as a uniform Nash payoff. The proof checks the independent distribution over quitting coalitions and the bounds against arbitrary behavioral deviations. [Challenge.lean](Challenge.lean) · [Solution.lean](Solution.lean) · [Lean proof](PlanarQuitting/Independent.lean)
+- **Directed cycle.** A regular feasible face system with infeasible singleton sites and no sink gives a directed cycle. In the quitting game represented by those faces, with the stated payoff floors for players outside the face system, the cycle yields a uniform Nash payoff. [Geometry](PlanarQuitting/Geometry.lean) · [Uniform payoff from the cycle](PlanarQuitting/CycleImplementation.lean)
+- **Stationary exit.** When every player faces a positive rival quitting probability, the exact stationary payoff comparisons suffice for a uniform Nash payoff against arbitrary behavioral deviations. [Stationary profile](PlanarQuitting/Stationary.lean)
+- **Signed count.** The checked complementarity lemmas identify the two-player supports at sink pairs. A separate signed-count theorem gives an additional zero when the finite affine root count near unanimous continuation differs from the global count. [Complementarity](PlanarQuitting/NormalMap.lean) · [Signed-count transfer](PlanarQuitting/IndexTransfer.lean)
 
-The full affine-plane existence statement is recorded in Lean. The step that derives a stationary exit or a suitable calendar from the geometry remains a paper proof. The Comparator configuration selects the checked calendar implication. [Full target](PlanarQuitting/Target.lean) · [Comparator configuration](comparator.json) · [Formalization metadata](formalization.yaml)
+The full affine-plane existence statement is recorded in Lean. The remaining work includes specializing the signed count to the game's comparison map, implementing the single-quitter cases, and removing the regularity assumptions by perturbation. The Comparator configuration selects `PlanarQuitting.periodic_calendar_uniform_payoff`, the verified refinement from a periodic calendar to an independent-action uniform payoff. [Full target](PlanarQuitting/Target.lean) · [Calendar proof](PlanarQuitting/Independent.lean) · [Comparator configuration](comparator.json)
 
 ## Local verification
 
@@ -42,4 +44,4 @@ lake --wfail build PlanarQuitting Solution
 lake build Challenge
 ```
 
-The Challenge contains one deliberate `sorry` at the statement to compare. The solution theorem uses only `propext`, `Classical.choice`, and `Quot.sound`. A Palomar submission requires a public release licence, a supported toolchain replay, full mechanical preflight, and maintainer approval of the exact snapshot. [Palomar submission guide](https://palomar-registry.org/how-to-submit)
+The Challenge contains one deliberate `sorry` at the statement to compare. The checked results listed above use only `propext`, `Classical.choice`, and `Quot.sound`. [Formalization metadata](formalization.yaml)

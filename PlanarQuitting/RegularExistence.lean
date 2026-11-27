@@ -37,7 +37,7 @@ private theorem solo_stationary_inequality (g : Game (Fin n))
     (1-p k)*g.prize {i} i + p k*g.prize {i,k} i ≤ g.prize {k} i := by
   have off (a : Fin n) (ha : a ≠ k) : p a = 0 := by
     have h := congrFun only a
-    simpa only [withoutOwn, if_neg ha, Pi.zero_apply] using h
+    simpa only [withoutOwn, ite_eq_right ha, Pi.zero_apply] using h
   let cal : Calendar (Fin n) := ⟨fun _ ↦ k, fun _ ↦ p k⟩
   have eqP : cal.profile = Profile.stationary p := by
     funext t a
@@ -52,7 +52,7 @@ private theorem solo_stationary_inequality (g : Game (Fin n))
   have hCash := exact (fun _ ↦ 0)
   have hQuit := exact (fun _ ↦ 1)
   have hw : opponentWait p i = 1-p k := by
-    simp only [opponentWait, opponentMass,Finset.notMem_empty,if_false]
+    simp only [opponentWait, opponentMass,Finset.notMem_empty,ite_false]
     rw [Finset.prod_eq_single_of_mem k (Finset.mem_erase.mpr ⟨Ne.symm hi,Finset.mem_univ _⟩)]
     intro a _ ha
     simp [off a ha]
@@ -72,7 +72,7 @@ private theorem rival_positive_exit (p : Coordinates n) (hp : p ∈ Icc 0 1)
   let s := Finset.univ.erase i
   have hmem : j ∈ s := Finset.mem_erase.mpr ⟨hji,Finset.mem_univ _⟩
   have hrest : (∏ k ∈ s.erase j, (1-p k)) ≤ 1 :=
-    Finset.prod_le_one (fun k _ ↦ sub_nonneg.mpr (hp.2 k))
+    Finset.prod_le_one₀ (fun k _ ↦ sub_nonneg.mpr (hp.2 k))
       (fun k _ ↦ sub_le_self 1 (hp.1 k))
   have he : opponentWait p i = ∏ k ∈ s, (1-p k) := by simp [opponentWait,opponentMass,s]
   rw [he, ← Finset.prod_erase_mul s (fun k ↦ 1-p k) hmem]
@@ -101,7 +101,7 @@ theorem uniform_of_stationary_comparisons (g : Game (Fin n))
       funext j
       by_cases hj : j = i
       · simp [withoutOwn,hj]
-      · exact (if_neg hj).trans (le_antisymm (not_pos j hj) (hp.1 j))
+      · exact (ite_eq_right hj).trans (le_antisymm (not_pos j hj) (hp.1 j))
     obtain ⟨j,hj⟩ := hazard_exists hp.1 hne
     have hji : j = i := by
       by_contra hj'

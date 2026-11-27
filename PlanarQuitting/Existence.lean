@@ -115,7 +115,7 @@ theorem planar_uniform_payoff_all_states
   | none => exact sol N hN i
   | some A =>
     have hn : N ≠ 0 := Nat.ne_of_gt (hH.trans hN)
-    simp only [expectedAverageFrom,hn,if_false,v,sub_self,abs_zero]
+    simp only [expectedAverageFrom,hn,ite_false,v,sub_self,abs_zero]
     exact ⟨hε.le,fun _ _ ↦ le_add_of_nonneg_right hε.le⟩
 
 #print axioms planar_uniform_payoff_all_states

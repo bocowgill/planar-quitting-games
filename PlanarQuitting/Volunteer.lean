@@ -130,7 +130,7 @@ theorem wait_eq (h : Certificate g p v e M K) (t : ℕ) (i : I) :
   · have ht := h.actor_tie t
     have hr := h.recurrence t i
     rw [hi] at ht hr
-    simp only [rival, hi, if_true, sub_zero, one_mul, zero_mul, add_zero]
+    simp only [rival, hi, ite_true, sub_zero, one_mul, zero_mul, add_zero]
     rw [← ht] at hr
     linarith
   · simpa [rival, hi] using h.recurrence t i
@@ -140,14 +140,14 @@ theorem honest_step (h : Certificate g p v e M K) (t : ℕ) (i : I) :
   by_cases hi : p.actor t = i
   · have ht := h.actor_tie t
     rw [hi] at ht
-    simp only [newPrize, quitReward, remaining, own, rival, hi, if_true, sub_zero, one_mul,
+    simp only [newPrize, quitReward, remaining, own, rival, hi, ite_true, sub_zero, one_mul,
       zero_mul, add_zero, mul_zero, mul_one]
     rw [← ht]
     have hv := wait_eq h t i
     simp [rival, hi] at hv
     linarith
   · have hv := wait_eq h t i
-    simp only [own, hi, if_false, newPrize, remaining, sub_zero, one_mul, zero_mul, zero_add]
+    simp only [own, hi, ite_false, newPrize, remaining, sub_zero, one_mul, zero_mul, zero_add]
     linarith
 
 theorem honest_account (h : Certificate g p v e M K) (i : I) (t : ℕ) :

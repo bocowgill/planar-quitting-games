@@ -2,6 +2,7 @@ module
 
 public import Mathlib.Analysis.Calculus.DifferentialForm.VectorField
 public import Mathlib.MeasureTheory.Integral.DivergenceTheorem
+import Mathlib.Analysis.Calculus.FDeriv.ContinuousAlternatingMap
 import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.Dimension.Constructions
 

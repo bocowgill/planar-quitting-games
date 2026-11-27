@@ -1,5 +1,7 @@
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.Data.Real.Basic
+module
+
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Ring
@@ -10,6 +12,8 @@ The geometric identity works for every real vector space and linear payoff
 functional. The explicit four-player system uses the singleton payoff rows
 of the square with points (0,-2), (1,3), (-1,0), and (2,1).
 -/
+
+@[expose] public section
 
 namespace PlanarQuitIndex
 
@@ -82,7 +86,7 @@ theorem square_lcp_iff {q x y z w : ℝ} (hq : 0 ≤ q) :
     repeat' constructor
     all_goals nlinarith only [hq]
 
-private def pos (x : ℝ) := max x 0
+def pos (x : ℝ) := max x 0
 
 private theorem parts (x : ℝ) : pos x * pos (-x) = 0 ∧ pos x - pos (-x) = x := by
   rcases le_total 0 x with h | h

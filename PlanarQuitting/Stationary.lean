@@ -82,9 +82,9 @@ theorem stationarity_row (g : Game I) (x : I → ℝ) (i : I) (q : ℕ → ℝ) 
 
 private theorem opponentWait_unit {x : I → ℝ}
     (hx : ∀ i, 0 ≤ x i ∧ x i ≤ 1) (i : I) : 0 ≤ opponentWait x i ∧ opponentWait x i ≤ 1 := by
-  simp only [opponentWait, opponentMass, Finset.notMem_empty, if_false]
+  simp only [opponentWait, opponentMass, Finset.notMem_empty, ite_false]
   exact ⟨Finset.prod_nonneg (fun j _ ↦ sub_nonneg.mpr (hx j).2),
-    Finset.prod_le_one (fun j _ ↦ sub_nonneg.mpr (hx j).2) (fun j _ ↦ sub_le_self 1 (hx j).1)⟩
+    Finset.prod_le_one₀ (fun j _ ↦ sub_nonneg.mpr (hx j).2) (fun j _ ↦ sub_le_self 1 (hx j).1)⟩
 
 /-- The stationary product has at least two effective quitting actors in the
 sense that every player faces a positive probability of a rival quitting. -/
@@ -246,7 +246,7 @@ theorem uniform_of_stationary_exit (g : Game I) (x : I → ℝ)
     by_cases h1 : x i = 1
     · have hp : 0 < x i := h1.symm ▸ one_pos
       have hle := (hcomp i).2 hp
-      simp only [u, if_pos h1, h1, sub_self, zero_mul, zero_add, one_mul, le_refl, and_true,
+      simp only [u, ite_eq_left h1, h1, sub_self, zero_mul, zero_add, one_mul, le_refl, and_true,
         true_and]
       unfold stationaryDifference at hle
       linarith only [hle]
@@ -256,7 +256,7 @@ theorem uniform_of_stationary_exit (g : Game I) (x : I → ℝ)
         apply (le_div_iff₀ hden).mpr
         unfold stationaryDifference at hl
         linarith only [hl]
-      simp only [u, if_neg h1, heq]
+      simp only [u, ite_eq_right h1, heq]
       refine ⟨hq', le_rfl, ?_⟩
       by_cases h0 : x i = 0
       · simp [h0]

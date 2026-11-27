@@ -31,8 +31,8 @@ theorem withoutOwn_continuous (i : Fin n) : Continuous (withoutOwn i) := by
   apply continuous_pi
   intro j
   by_cases hj : j = i
-  · simpa only [withoutOwn, if_pos hj] using continuous_const
-  · simpa only [withoutOwn, if_neg hj] using continuous_apply j
+  · simpa only [withoutOwn, ite_eq_left hj] using continuous_const
+  · simpa only [withoutOwn, ite_eq_right hj] using continuous_apply j
 
 @[simp] theorem withoutOwn_zero (i : Fin n) : withoutOwn i 0 = 0 := by
   funext j

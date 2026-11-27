@@ -133,7 +133,7 @@ private theorem singletonPerturbation_prize (g : Game (Fin n)) (b : Coordinates 
   unfold singletonPerturbation
   dsimp
   let h : ∃ k : Fin n, ({j} : Finset (Fin n)) = {k} := ⟨j,rfl⟩
-  rw [dif_pos h]
+  rw [dite_eq_left h]
   have he : Classical.choose h = j := Finset.singleton_inj.mp (Classical.choose_spec h).symm
   rw [he]
 

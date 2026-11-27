@@ -112,9 +112,12 @@ theorem topIntegral_eq_id {n : ℕ} {a b : Coordinates n} (hab : a ≤ b)
     · simp [A, B]
     · simpa [A, B] using hab k
   have hspace : ContDiff ℝ 2 (spatial : Coordinates (n+1) → Coordinates n) := by
-    exact contDiff_pi.mpr (fun j ↦ contDiff_apply ℝ ℝ j.succ)
+    apply contDiff_pi.mpr
+    intro j
+    change ContDiff ℝ 2 (fun x : Coordinates (n+1) ↦ x j.succ)
+    exact contDiff_apply ℝ (fun _ : Fin (n+1) ↦ ℝ) j.succ
   have htime : ContDiff ℝ 2 (fun x : Coordinates (n+1) ↦ x 0) :=
-    contDiff_apply ℝ ℝ 0
+    contDiff_apply ℝ (fun _ : Fin (n+1) ↦ ℝ) 0
   have hH : ContDiff ℝ 2 (timeLine f) :=
     ((contDiff_const.sub htime).smul hspace).add (htime.smul (hf.comp hspace))
   have hfaces (i : Fin (n+1)) (hi : i ≠ 0) (y : Coordinates n)

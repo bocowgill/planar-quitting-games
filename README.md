@@ -36,7 +36,7 @@ The complete planar theorem is checked as `PlanarQuitting.planar_uniform_payoff`
 
 ## Local verification
 
-The review draft pins Lean 4.33.1 and Mathlib commit `0df444a360eaa60ab8c11dca51a86af692955474`. Run these commands from the project root with Elan installed.
+The review draft pins Lean 4.35.0 and Mathlib commit `56a005855ea17e0b0958f73ec801ae140b0a1679`. Run these commands from the project root with Elan installed.
 
 ```sh
 lake exe cache get
@@ -44,4 +44,4 @@ lake --wfail build PlanarQuitting Solution
 lake build Challenge
 ```
 
-The Comparator configuration selects the full theorem. The Challenge contains one deliberate `sorry` at that statement. The solution uses only `propext`, `Classical.choice`, and `Quot.sound`. [Comparator configuration](comparator.json) · [Formalization metadata](formalization.yaml)
+The Comparator configuration selects the full theorem. The standalone Challenge contains one deliberate `sorry` at that statement. The solution uses only `propext`, `Classical.choice`, and `Quot.sound`. [Challenge](Challenge.lean) · [Comparator configuration](comparator.json) · [Formalization metadata](formalization.yaml)

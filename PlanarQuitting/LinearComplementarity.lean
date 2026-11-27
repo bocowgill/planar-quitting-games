@@ -168,18 +168,18 @@ theorem normal_affine_near (M : PayoffMatrix n) (q z : Coordinates n)
     · have h : {x : Coordinates n | 0 < x j} ∈ 𝓝 z :=
         (isOpen_lt continuous_const (continuous_apply j)).mem_nhds (pos j hj)
       filter_upwards [h] with x hx
-      exact if_pos hj ▸ hx
+      exact ite_eq_left hj ▸ hx
     · have h : {x : Coordinates n | x j < 0} ∈ 𝓝 z :=
         (isOpen_lt (continuous_apply j) continuous_const).mem_nhds (neg j hj)
       filter_upwards [h] with x hx
-      exact if_neg hj ▸ hx
+      exact ite_eq_right hj ▸ hx
   filter_upwards [eventually_all.mpr hsign] with x hx
   have hp (j : Fin n) : positivePart x j = if j ∈ A then x j else 0 := by
     have h := hx j
     by_cases hj : j ∈ A
-    · simp only [if_pos hj] at h ⊢
+    · simp only [ite_eq_left hj] at h ⊢
       exact max_eq_right h.le
-    · simp only [if_neg hj] at h ⊢
+    · simp only [ite_eq_right hj] at h ⊢
       exact max_eq_left h.le
   funext i
   change x i - positivePart x i + matrixMap M (positivePart x) i + q i =
@@ -198,7 +198,7 @@ theorem normal_affine_near (M : PayoffMatrix n) (q z : Coordinates n)
         simp [activeMatrix, hj, hp]
       · simp [activeMatrix, hj, hp, hij]
   simp_rw [split]
-  rw [Finset.sum_add_distrib, Finset.sum_ite_eq, if_pos (Finset.mem_univ i)]
+  rw [Finset.sum_add_distrib, Finset.sum_ite_eq, ite_eq_left (Finset.mem_univ i)]
   abel
 
 #print axioms complementary_of_normal_zero

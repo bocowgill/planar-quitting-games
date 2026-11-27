@@ -44,9 +44,8 @@ private theorem alive_drop {p : Calendar I} (hp : Legal p.prob) (i : I)
   have hr := rival_legal hp i t
   have hw : remaining p i q t ≤ 1 := by
     unfold remaining
-    have h : (1-q t)*(1-rival p i t) ≤ 1 := mul_le_one₀ (by linarith [(hq t).1])
-      (by linarith [hr.2]) (by linarith [hr.1])
-    exact h
+    exact (mul_le_of_le_one_left (sub_nonneg.mpr hr.2)
+      (sub_le_self 1 (hq t).1)).trans (sub_le_self 1 hr.1)
   exact mul_le_of_le_one_right (alive_nonneg hp i hq t) hw
 
 private theorem alive_antitone {p : Calendar I} (hp : Legal p.prob) (i : I)
@@ -284,7 +283,7 @@ theorem uniform_of_solo_cutoff [Fintype I] (g : Game I) (k j : I)
       have ht' : t < H := by omega
       have h := honest_capital_step g p i (u i) t
       change C i (own p i) (t+1) - C i (own p i) t = _ at h
-      simp only [p,ht',if_true,u,sub_self,mul_zero] at h
+      simp only [p,ht',ite_true,u,sub_self,mul_zero] at h
       rw [ih (by omega)] at h
       linarith
   have ownSurv (i : I) : A i (own p i) H ≤ δ := by
@@ -295,7 +294,7 @@ theorem uniform_of_solo_cutoff [Fintype I] (g : Game I) (k j : I)
   have otherSurv (i : I) (hi : i ≠ k) (q : ℕ → ℝ) (hq : Legal q) : A i q H ≤ δ := by
     have h' := survival_window hp i hq (sub_nonneg.mpr hh₁) (Nat.zero_le H)
       (fun t _ ht ↦ by
-        simp only [remaining,rival,p,ht,if_true,if_neg (Ne.symm hi)]
+        simp only [remaining,rival,p,ht,ite_true,ite_eq_right (Ne.symm hi)]
         exact mul_le_of_le_one_left (sub_nonneg.mpr hh₁) (sub_le_self _ (hq t).1))
     simpa using h'.trans (by simpa using (hH H le_rfl).le)
   let T := H+D
@@ -337,7 +336,7 @@ theorem uniform_of_solo_cutoff [Fintype I] (g : Game I) (k j : I)
             · exact tailUpper s (le_of_not_gt hs)
           · by_cases hs : s < H
             · simp [p,hs,u,he.le]
-            · simp only [p,hs,if_false,u]
+            · simp only [p,hs,ite_false,u]
               linarith only [punish,he])).2
         change C k q (t+1)-C k q 0 ≤ e*(1-A k q (t+1)) at h'
         rw [default0] at h'
@@ -345,7 +344,7 @@ theorem uniform_of_solo_cutoff [Fintype I] (g : Game I) (k j : I)
           mul_nonneg hB.le hδ.le], ?_⟩
         rcases safe with hjk | hs
         · have hstay := survival_window hp k hq (sub_nonneg.mpr ηle) Hle (fun s hs _ ↦ by
-            simp only [remaining,rival,p,not_lt.mpr hs,if_false,if_neg hjk]
+            simp only [remaining,rival,p,not_lt.mpr hs,ite_false,ite_eq_right hjk]
             exact mul_le_of_le_one_left (sub_nonneg.mpr ηle) (sub_le_self _ (hq s).1))
           exact liveSmall k (hstay.trans (hD _ (by dsimp [T] at ht; omega)).le)
         · exact (mul_nonpos_of_nonneg_of_nonpos (alive_nonneg hp k hq (t+1))
@@ -460,7 +459,7 @@ theorem uniform_of_wait [Fintype I] (g : Game I)
     | zero => simp [capital,accrued,alive]
     | succ t ih =>
       have he := capital_step g p i q (g.live i) t
-      simp only [hquit,rival,p,if_true,mul_zero,zero_mul,add_zero] at he
+      simp only [hquit,rival,p,ite_true,mul_zero,zero_mul,add_zero] at he
       have hn := mul_nonpos_of_nonneg_of_nonpos (alive_nonneg legal i hq t)
         (mul_nonpos_of_nonneg_of_nonpos (hq t).1 (sub_nonpos.mpr (no_gain i)))
       linarith only [ih,he,hn]

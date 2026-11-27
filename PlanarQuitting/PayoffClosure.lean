@@ -60,7 +60,7 @@ private theorem coalition_mass_one (σ : Profile I) (t : ℕ) :
         rw [Finset.mul_sum]
         apply Finset.sum_congr rfl
         intro A _
-        simp only [w,Finset.prod_insert hnot,Finset.mem_insert_self,if_true]
+        simp only [w,Finset.prod_insert hnot,Finset.mem_insert_self,ite_true]
         congr 1
         apply Finset.prod_congr rfl
         intro j hj
@@ -79,7 +79,7 @@ private theorem cash_mass (σ : Profile I) (t : ℕ) :
   have h := coalition_mass_one σ t
   rw [← Finset.sum_erase_add _ _ (Finset.mem_univ (∅ : Finset I))] at h
   rw [← Finset.sum_erase_add _ _ (Finset.mem_univ (∅ : Finset I))]
-  simp only [if_true,add_zero]
+  simp only [ite_true,add_zero]
   have he : (∑ A ∈ Finset.univ.erase (∅ : Finset I),
       if A = ∅ then 0 else coalitionProb σ t A) =
       ∑ A ∈ Finset.univ.erase (∅ : Finset I), coalitionProb σ t A := by
@@ -116,7 +116,7 @@ theorem expected_abs_bound (g : Game I) {σ : Profile I} (hσ : σ.legal)
         intro A _
         by_cases h : A = ∅
         · simp [h]
-        · rw [if_neg h,if_neg h,abs_mul,abs_of_nonneg (mass_nonneg hσ t A),mul_comm B]
+        · rw [ite_eq_right h,ite_eq_right h,abs_mul,abs_of_nonneg (mass_nonneg hσ t A),mul_comm B]
           exact mul_le_mul_of_nonneg_left (absorbed A) (mass_nonneg hσ t A)
       refine (abs_add_le ..).trans ?_
       rw [abs_mul,abs_of_nonneg (liveProb_nonneg hσ t)]

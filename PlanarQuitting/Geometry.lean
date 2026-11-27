@@ -3,7 +3,7 @@ module
 public import Mathlib.Data.Finset.Max
 public import Mathlib.Data.Fintype.Pigeonhole
 public import Mathlib.Data.Fintype.Prod
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 public import Mathlib.Algebra.Module.LinearMap.Basic
 public import Mathlib.Logic.Function.Iterate
 import Mathlib.Tactic.Linarith

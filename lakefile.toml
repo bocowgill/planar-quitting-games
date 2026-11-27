@@ -5,7 +5,7 @@ defaultTargets = ["Solution", "PlanarQuitting"]
 name = "mathlib"
 scope = "leanprover-community"
 git = "https://github.com/leanprover-community/mathlib4"
-rev = "0df444a360eaa60ab8c11dca51a86af692955474"
+rev = "56a005855ea17e0b0958f73ec801ae140b0a1679"
 
 [[lean_lib]]
 name = "PlanarQuitting"

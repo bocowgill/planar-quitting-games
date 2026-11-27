@@ -57,9 +57,9 @@ private theorem mass_hasDeriv (i : Fin n) (A : Finset (Fin n)) :
         (if j ∈ A then coord j else -(coord j)) 0 := by
     have he := (coord j).hasFDerivAt (x := (0 : Coordinates n))
     by_cases hj : j ∈ A
-    · simp only [if_pos hj]
+    · simp only [ite_eq_left hj]
       exact he
-    · simp only [if_neg hj]
+    · simp only [ite_eq_right hj]
       exact he.const_sub (1 : ℝ)
   have hh := HasFDerivAt.finsetProd (u := Finset.univ.erase i) (fun j _ ↦ h j)
   simpa only [opponentMass, Finset.prod_apply, Pi.zero_apply, sub_zero, massDerivative] using hh
@@ -201,9 +201,9 @@ theorem stationaryDifference_continuous (g : Game (Fin n)) :
     apply continuous_finsetProd
     intro j _
     by_cases hj : j ∈ A
-    · simp only [if_pos hj]
+    · simp only [ite_eq_left hj]
       exact continuous_apply j
-    · simp only [if_neg hj]
+    · simp only [ite_eq_right hj]
       exact continuous_const.sub (continuous_apply j)
   apply continuous_pi
   intro i
@@ -216,9 +216,9 @@ theorem stationaryDifference_continuous (g : Game (Fin n)) :
     apply continuous_finsetSum
     intro A _
     by_cases he : A = ∅
-    · simp only [if_pos he]
+    · simp only [ite_eq_left he]
       exact continuous_const
-    · simp only [if_neg he]
+    · simp only [ite_eq_right he]
       exact (mass i A).mul continuous_const
   exact hc.sub (hh.mul hq)
 

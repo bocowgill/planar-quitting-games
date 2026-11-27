@@ -91,8 +91,8 @@ private theorem rival_opportunity [DecidableEq I] (d : DirectedCycle F) (owner :
     exact fun h ↦ (d.reverse 1).distinct (owner.injective h).symm
   by_cases h : (d.calendar owner).actor 0 = i
   · have h' : (d.calendar owner).actor 1 ≠ i := fun he ↦ hd (h.trans he.symm)
-    exact ⟨1, d.length_gt_one, by rw [rival, if_neg h']; exact (d.reverse_step 1).pos⟩
-  · exact ⟨0, d.length_pos, by rw [rival, if_neg h]; exact (d.reverse_step 0).pos⟩
+    exact ⟨1, d.length_gt_one, by rw [rival, ite_eq_right h']; exact (d.reverse_step 1).pos⟩
+  · exact ⟨0, d.length_pos, by rw [rival, ite_eq_right h]; exact (d.reverse_step 0).pos⟩
 
 private theorem finite_upper_bound {A : Type*} [Fintype A] (f : A → ℝ) :
     ∃ C : ℝ, 0 ≤ C ∧ ∀ a, f a ≤ C := by

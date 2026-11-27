@@ -40,10 +40,10 @@ def extendCore (default : ℝ) (t : K → ℝ) : Coordinates n :=
   fun i ↦ if h : i ∈ K then t ⟨i, h⟩ else default
 
 @[simp] theorem extendCore_in (d : ℝ) (t : K → ℝ) (i : K) :
-    extendCore d t i = t i := dif_pos i.property
+    extendCore d t i = t i := dite_eq_left i.property
 
 @[simp] theorem extendCore_out (d : ℝ) (t : K → ℝ) {i : Fin n} (hi : i ∉ K) :
-    extendCore d t i = d := dif_neg hi
+    extendCore d t i = d := dite_eq_right hi
 
 variable (rep : ComparisonFaces M K F)
 

@@ -134,7 +134,7 @@ theorem bisect_alive (hp : Legal p.prob) (i : I) (t : ℕ) :
     by_cases h : p.actor t = i
     · simp [remaining, rival, h]
     · simp only [remaining, rival, bisect_actor_even, bisect_actor_odd, bisect_prob_even,
-        bisect_prob_odd, h, if_false, sub_zero, one_mul]
+        bisect_prob_odd, h, ite_false, sub_zero, one_mul]
       rw [mul_assoc, ← pow_two, halfHazard_sq (hp t).2]
 
 private theorem bisect_alive_between (hp : Legal p.prob) (i : I) (t : ℕ) :

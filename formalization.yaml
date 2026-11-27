@@ -71,4 +71,4 @@ fidelity:
     an affine representation in two real coordinates.
 review:
   status: "agent-reviewed"
-  notes: "The solution was checked in Lean 4.33.1."
+  notes: "The solution was checked in Lean 4.35.0."
